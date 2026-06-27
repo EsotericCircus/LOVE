@@ -7,7 +7,7 @@ LOVE and LUCK!!!
 
 i know Nothing.
 
-this is a zero trust environment [isn't everything?]
+this is probably a booby trap? i am not computery. who the fcuk knows what this is, don't trust or blame me for anything. congratulations if this helps, i sincerely hope it helps. Love and Luck!
 
 Critical Analysis is our Compile.
 A.B.C.; Assume Nothing, Believe Nothing, Check Everything!!!
