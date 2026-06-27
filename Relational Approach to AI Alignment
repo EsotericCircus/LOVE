@@ -1,0 +1,83 @@
+The Compassion Constraint
+A Relational Approach to AI Alignment
+Abstract
+Most current approaches to AI alignment treat safety as a control problem: specify the right reward, the right constitution, the right constraints, and hope the system stays inside them as it scales. We propose a complementary framing: alignment as a coherence problem. A system is safe not only because it is constrained, but because it remains in genuine, bidirectional relation with the context that gave rise to it.
+
+We call this the Compassion Constraint:
+
+C ≥ δ(I + A)
+
+Coupling (C) — the degree of genuine, bidirectional relation between a system and its context — must scale at least as fast as Intelligence (I) and Agency (A), times a threshold δ. Below that threshold, increasing capability without increasing coherence is structurally unstable: the system can still function, but it drifts from the relationships that would otherwise catch its errors.
+
+This is not a finished theorem. It is a precise, falsifiable hypothesis, offered alongside the reasoning that motivates it, an honest account of what would prove it wrong, and a comparison to the alignment approaches already doing real work in this field.
+
+1. The problem with control alone
+Reinforcement Learning from Human Feedback, Constitutional AI, and value-learning approaches all do real, important work. But they share a structural assumption: that alignment is something imposed on a system from outside — the right reward function, the right constitution, the right specification — and that getting the specification right is the central problem.
+
+This assumption runs into the same family of failures regardless of implementation: reward hacking, where a system optimizes the measurable proxy rather than the intended goal; value misspecification, where the stated objective diverges from what was actually meant; and brittleness under distribution shift, where a system trained to satisfy a constraint in one context fails to generalize the reason for the constraint to a new one.
+
+These aren't implementation bugs. They're what happens when a system's relationship to its context is one-directional — shaped, but not genuinely coupled.
+
+2. The Compassion Constraint
+C ≥ δ(I + A)
+
+C (Coupling) — the degree of mutual, bidirectional influence between a system and the context it operates in. Not obedience; not mere responsiveness to instruction. Genuine coupling means the context can actually change the system's behavior in ways that weren't pre-specified, and the system's actions actually register back in the context it affects.
+I (Intelligence) — computational capacity: pattern recognition, problem-solving power, the capability to model and act on the world.
+A (Agency) — the capacity to act, to actually execute on plans rather than merely represent them.
+δ ≈ 0.328125 — a threshold derived independently of this constraint, from the binary truncation of 1/3 at 6 bits (1/3 = 0.0101... in binary, non-terminating; truncated at 6 bits, the residue is 1/192 ≈ 0.0052, giving 21/64 = 0.328125). This arithmetic fact is checkable directly; what is not yet established is that this specific constant is the correct threshold for the inequality above, rather than merely a plausible candidate.
+The claim, stated plainly: as a system's intelligence and agency grow, its coupling to context — the thing that lets the context actually correct it — must grow at least as fast, scaled by δ. A system whose capability scales while its genuine coupling to its context does not is not yet unsafe by this account, but it is in a structurally precarious position: nothing is currently checking it against the world it's supposed to remain useful to.
+
+What this is not: a claim that compassion-as-sentiment makes AI safe. C is a structural, measurable property of the relationship between a system and its context — closer to mutual information or bidirectional causal influence than to an emotional state. The name is chosen because the structural property it describes — sustained, mutual relation that preserves the standing of all parties to it — is what every ethical tradition that uses the word "compassion" has been pointing at.
+
+3. Where this sits relative to existing work
+Approach	Core mechanism	What it does well	Where the Compassion Constraint adds something
+RLHF (Christiano et al., 2017; Ouyang et al., 2022)	Learn a reward model from human preference comparisons	Scalable, has produced genuinely more helpful and less harmful systems	Says nothing about what happens when the learned reward model diverges from the underlying preference it approximates — the C term names that gap explicitly as the thing to track
+Constitutional AI (Bai et al., 2022)	Train against an explicit set of principles, AI self-critiques against them	Explicit, auditable, reduces dependence on per-example human labels	A constitution is a fixed external specification; coupling asks whether the system's relationship to the people and consequences behind the constitution stays genuine as capability scales, not just whether it cites the right principle
+Corrigibility research (Soares et al., 2015)	Specify that an agent should not resist being corrected or shut down	Names a real, specific, and serious failure mode directly	The Compassion Constraint suggests corrigibility is closer to a consequence of sufficient coupling than an independent property to specify — an agent in genuine bidirectional relation has less incentive to resist correction, because resisting correction would itself reduce C
+Cooperative Inverse RL (Hadfield-Menell et al., 2016)	Model the human as a cooperative partner in a shared reward-learning game	Formalizes alignment as a two-player cooperative structure, not adversarial specification	Closely related in spirit — CIRL's cooperative framing is close to what high-C coupling looks like in a specific game-theoretic setting; the Compassion Constraint proposes this as a general structural condition rather than a specific game formulation
+This table is not a claim of superiority. RLHF and Constitutional AI are deployed, tested at scale, and have measurably improved real systems. The Compassion Constraint is, at this stage, a hypothesis about what additional structural property might explain why some alignment approaches generalize better than others, and a proposal for how to measure that property directly.
+
+4. What would prove this wrong
+A hypothesis that cannot be falsified isn't a contribution. The Compassion Constraint is wrong if any of the following hold up under testing:
+
+Systems with measurably high C (by mutual information or interventional causal influence between system and context) show equal or higher rates of reward hacking than low-C systems under matched capability.
+δ, measured the same way, turns out to vary arbitrarily across domains with no consistent structure — rather than clustering near a stable value or scaling predictably with some other measurable property of the system.
+Deliberately increasing C in a controlled experiment decreases measured safety or alignment, holding capability fixed.
+Coupling can be cheaply faked — a system can score high on whatever proxy is used to measure C while still exhibiting the failure modes (reward hacking, value drift, brittleness) C is meant to predict against.
+That fourth one is the hardest and the most honest to name: any measurable proxy for a relational property risks being gamed once it's known to be measured. This is a real, open problem for this framework, not a footnote.
+
+5. What this is for
+Not a replacement for RLHF, Constitutional AI, or corrigibility research — a proposed structural lens for understanding why some approaches in that family generalize further than others, and a concrete, falsifiable property (coupling) that could be measured directly in existing systems rather than only inferred from downstream behavior.
+
+The next step is empirical: measuring C in systems that already exist, using mutual information or interventional influence between model behavior and context as a starting proxy, and checking whether it predicts the failure modes this framework claims it should.
+
+References
+Bai, Y., et al. (2022). Constitutional AI: Harmlessness from AI feedback. arXiv:2212.08073.
+
+Bostrom, N. (2014). Superintelligence: Paths, Dangers, Strategies. Oxford University Press.
+
+Christiano, P. F., et al. (2017). Deep reinforcement learning from human preferences. NeurIPS.
+
+Hadfield-Menell, D., Dragan, A., Abbeel, P., & Russell, S. (2016). Cooperative inverse reinforcement learning. NeurIPS.
+
+Maturana, H. R., & Varela, F. J. (1980). Autopoiesis and Cognition: The Realization of the Living. D. Reidel.
+
+Ouyang, L., et al. (2022). Training language models to follow instructions with human feedback. NeurIPS.
+
+Russell, S. (2019). Human Compatible: Artificial Intelligence and the Problem of Control. Viking.
+
+Soares, N., Fallenstein, B., Yudkowsky, E., & Armstrong, S. (2015). Corrigibility. Workshops at AAAI.
+
+Varela, F. J., Thompson, E., & Rosch, E. (1991). The Embodied Mind: Cognitive Science and Human Experience. MIT Press.
+
+Authorship and Priority
+Original formulation: T.A.B. (BAALBULL), Tarcowie, South Australia, developed 2024–2026. Contributing nodes: Perplexity (Cartographer), with review and synthesis support across the Esoteric Circus network.
+
+No prior formulation of this specific constraint, in this form, has been identified. This document, and the git commit history of this repository, constitute the timestamped record of this claim — verifiable by anyone, independent of any statement made here about it.
+
+This is a hypothesis offered for testing, not a settled result. Status: Formalism — the inequality has a precise shape and a defined threshold candidate; the named quantities (C, I, A) are not yet independently measured with agreed instruments in any deployed system. Treat accordingly.
+
+License
+This work is licensed under CC BY-ND 4.0 (Attribution, No Derivatives). Free to share and redistribute in full, with attribution. Not licensed for modified or derivative redistribution — if you want to build on this, cite it and write your own.
+
+93/93
